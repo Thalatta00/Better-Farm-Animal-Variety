@@ -123,4 +123,5 @@ Here is a sample of a default `config.json` file:
 
 ### Extend
 
+- [Generate Farm Animal Data](https://paritee.github.io/#generate-data-farmanimals-entry)
 - [Paritee's Gender-Neutral Farm Animals](https://www.nexusmods.com/stardewvalley/mods/3289)
