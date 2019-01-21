@@ -1,6 +1,24 @@
 # Paritee's Better Farm Animal Variety
 
+Customize the types and species of farm animals you can raise without needing to replace the default farm animal types
+
+## Contents
+
+- [Install](#install)
+- [Configure](#configure)
+- [Extend](#extend)
+
+## Install
+
+1. Install the latest version of [SMAPI](https://smapi.io/)
+2. Install the latest version of [Content Patcher](https://www.nexusmods.com/stardewvalley/mods/1915)
+3. Download the mod files from [Nexus Games](https://www.nexusmods.com/stardewvalley/mods/3273)
+4. Unzip the mod files into `Stardew Valley/Mods`
+5. Run the game using SMAPI
+
 ## Configure
+
+You can configure your mod at `Stardew Valley/Mods/Paritee's Better Farm Animal Variety/config.json`
 
 ### Fields
 
@@ -102,3 +120,7 @@ Here is a sample of a default `config.json` file:
   }
 }
 ```
+
+### Extend
+
+- [Paritee's Gender-Neutral Farm Animals](https://www.nexusmods.com/stardewvalley/mods/3289)
