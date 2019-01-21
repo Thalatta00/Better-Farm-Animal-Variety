@@ -1,0 +1,73 @@
+{
+  "VoidFarmAnimalsInShop": 0,
+  "FarmAnimals": {
+    "Chickens": {
+      "Name": "default",
+      "Description": "default",
+      "ShopIcon": "default",
+      "Types": [
+        "White Chicken",
+        "Brown Chicken",
+        "Blue Chicken",
+        "Void Chicken"
+      ]
+    },
+    "Cows": {
+      "Name": "default",
+      "Description": "default",
+      "ShopIcon": "default",
+      "Types": [
+        "White Cow",
+        "Brown Cow"
+      ]
+    },
+    "Dinosaurs": {
+      "Name": "default",
+      "Description": "default",
+      "ShopIcon": "default",
+      "Types": [
+        "Dinosaur"
+      ]
+    },
+    "Ducks": {
+      "Name": "default",
+      "Description": "default",
+      "ShopIcon": "default",
+      "Types": [
+        "Duck"
+      ]
+    },
+    "Goats": {
+      "Name": "default",
+      "Description": "default",
+      "ShopIcon": "default",
+      "Types": [
+        "Goat"
+      ]
+    },
+    "Pigs": {
+      "Name": "default",
+      "Description": "default",
+      "ShopIcon": "default",
+      "Types": [
+        "Pig"
+      ]
+    },
+    "Rabbits": {
+      "Name": "default",
+      "Description": "default",
+      "ShopIcon": "default",
+      "Types": [
+        "Rabbit"
+      ]
+    },
+    "Sheep": {
+      "Name": "default",
+      "Description": "default",
+      "ShopIcon": "default",
+      "Types": [
+        "Sheep"
+      ]
+    }
+  }
+}
