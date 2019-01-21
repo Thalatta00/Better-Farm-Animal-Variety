@@ -26,7 +26,7 @@ namespace BetterFarmAnimalVariety.FarmAnimals
 
         public bool IsAlwaysInShop()
         {
-            return this.IsInShop(ModConfig.VOID_FARM_ANIMALS_IN_SHOP_NEVER);
+            return this.IsInShop(ModConfig.VOID_FARM_ANIMALS_IN_SHOP_ALWAYS);
         }
 
         public bool IsNeverInShop()

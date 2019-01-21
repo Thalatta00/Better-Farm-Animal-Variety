@@ -108,7 +108,7 @@ namespace BetterFarmAnimalVariety
             PurchaseFarmAnimalMenu.HandleTap(e);
         }
 
-        public void Log(string message, LogLevel logLevel)
+        public void Log(string message, LogLevel logLevel = LogLevel.Debug)
         {
             this.Monitor.Log(message, logLevel);
 
