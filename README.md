@@ -161,7 +161,7 @@ You cannot add a new farm animal without BFAV, but you can override and existing
   "Action": "EditData",
   "Target": "Data/FarmAnimals",
   "Entries": {
-"White Cow": ..,
+    "White Cow": ..,
   }
 },
 ```
@@ -187,8 +187,8 @@ You cannot add a new farm animal without BFAV, but you can override and existing
 {
   "Action": "EditData",
   "Target": "Data/FarmAnimals",
-"Fields": {
-"White Cow": ..,
+  "Fields": {
+    "White Cow": ..,
   },
   "When": { "Language": "de" },
 },
