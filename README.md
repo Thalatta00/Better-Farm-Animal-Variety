@@ -150,5 +150,51 @@ Here is a sample of a default `config.json` file:
 
 ### Extend
 
+#### Using BFAV Farm Animals without BFAV
+
+You cannot add a new farm animal without BFAV, but you can override and existing farm animal with a few modifications. Here is a method for overriding the `White Cow` with [Paritee's White Bull](https://www.nexusmods.com/stardewvalley/mods/3298). To do this, you need to change the following inside BFAV's `content.json`:
+
+1. Change the `Data/FarmAnimals` `Entries` key to `White Cow`
+
+```json
+{
+  "Action": "EditData",
+  "Target": "Data/FarmAnimals",
+  "Entries": {
+"White Cow": ..,
+  }
+},
+```
+
+2. Change the sprite `Target` paths to `White Cow`
+
+```json
+{
+  "Action": "Load",
+  "Target": "Animals/White Cow",
+  ..
+},
+{
+  "Action": "Load",
+  "Target": "Animals/BabyWhite Cow",
+  ..
+},
+```
+
+3. Change the localization `Data/FarmAnimals` `Field` keys to `White Cow` for each language
+
+```json
+{
+  "Action": "EditData",
+  "Target": "Data/FarmAnimals",
+"Fields": {
+"White Cow": ..,
+  },
+  "When": { "Language": "de" },
+},
+```
+
+#### Complimentary Mods
+
 - [Generate Farm Animal Data](https://paritee.github.io/#generate-data-farmanimals-entry)
 - [Paritee's Gender-Neutral Farm Animals](https://www.nexusmods.com/stardewvalley/mods/3289)
