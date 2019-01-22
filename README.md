@@ -14,15 +14,15 @@ Customize the types and species of farm animals you can raise without needing to
 
 1. Install the latest version of [SMAPI](https://smapi.io/)
 2. Install the latest version of [Content Patcher](https://www.nexusmods.com/stardewvalley/mods/1915)
-3. Download the Paritee's Better Farm Animal Variety (BFAV) mod files from [Nexus Games](https://www.nexusmods.com/stardewvalley/mods/3273)
+3. Download the [Paritee's Better Farm Animal Variety](https://www.nexusmods.com/stardewvalley/mods/3273) (BFAV) mod files from Nexus Mods
 4. Unzip the mod files into `Stardew Valley/Mods`
 5. Run the game using SMAPI
 
 ### Add New Farm Animal
 
-In this example we will be using [Paritee's White Bull](https://www.nexusmods.com/stardewvalley/mods/3298) mod
+The following section explains how to add a new farm animal. In this example we will be using [Paritee's White Bull](https://www.nexusmods.com/stardewvalley/mods/3298) mod, but this can be done with any farm animal type that has been loaded into `Data/FarmAnimals`. See [Configure.FarmAnimals](#farmanimals) for more information on the `Types` field.
 
-1. Make sure you following the [installation instructions](#install)
+1. Make sure you have [installed BFAV](#install)
 2. Unzip the [Paritee's White Bull](https://www.nexusmods.com/stardewvalley/mods/3298) folder into `Stardew Valley/Mods`
 3. Add "White Bull" to the `Cows.Types` array inside BFAV's `config.json`
 4. Run the game using SMAPI
