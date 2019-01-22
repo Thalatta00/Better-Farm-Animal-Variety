@@ -152,7 +152,7 @@ Here is a sample of a default `config.json` file:
 
 #### Using BFAV Farm Animals with Only Content Patcher
 
-You cannot add a new farm animal without BFAV, but you can override and existing farm animal with a few modifications. Here is a method for overriding the `White Cow` with [Paritee's White Bull](https://www.nexusmods.com/stardewvalley/mods/3298). To do this, you need to change the following inside BFAV's `content.json`:
+You cannot add a new farm animal without BFAV, but you can override and existing farm animal with a few modifications. Here is a method for overriding the `White Cow` with [Paritee's White Bull](https://www.nexusmods.com/stardewvalley/mods/3298). To do this, you need to change the following inside the farm animal mod's `content.json`:
 
 1. Change the `Data/FarmAnimals` `Entries` key to `White Cow`
 
