@@ -20,7 +20,7 @@ Customize the types and species of farm animals you can raise without needing to
 
 ### Add New Farm Animal
 
-The following section explains how to add a new farm animal. In this example we will be using [Paritee's White Bull](https://www.nexusmods.com/stardewvalley/mods/3298) mod, but this can be done with any farm animal type that has been loaded into `Data/FarmAnimals`. See [Configure.FarmAnimals](#farmanimals) for more information on the `Types` field.
+The following section explains how to add a new farm animal with BFAV (if you do not want to use BFAV, see [Content Patcher only](#using-bfav-farm-animals-with-only-content-patcher)). In this example we will be using [Paritee's White Bull](https://www.nexusmods.com/stardewvalley/mods/3298) mod, but this can be done with any farm animal type that has been loaded into `Data/FarmAnimals`. See [Configure.FarmAnimals](#farmanimals) for more information on the `Types` field.
 
 1. Make sure you have [installed BFAV](#install)
 2. Unzip the [Paritee's White Bull](https://www.nexusmods.com/stardewvalley/mods/3298) folder into `Stardew Valley/Mods`
