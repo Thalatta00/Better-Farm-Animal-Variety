@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BetterFarmAnimalVariety.Models;
+using System.Collections.Generic;
 
 namespace BetterFarmAnimalVariety.FarmAnimals
 {
@@ -9,7 +10,7 @@ namespace BetterFarmAnimalVariety.FarmAnimals
         public const double CHANCE_VALUE = 0.25;
         public const int EVENT_ID = 3900074;
 
-        public BlueFarmAnimals(ModEntry mod) : base(mod) { }
+        public BlueFarmAnimals(BetterPlayer player) : base(player) { }
 
         public override string GetPrefix()
         {

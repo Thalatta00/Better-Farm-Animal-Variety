@@ -36,7 +36,7 @@ namespace BetterFarmAnimalVariety.Player
             types.RemoveAll(item => !this.IsAvailable(item));
 
             // Remove Blue <FarmAnimal>s if we need to
-            types = new BlueFarmAnimals(this.Mod).Sanitize(types, SpecialFarmAnimals.SAFETY_SAFE);
+            types = new BlueFarmAnimals(this.Mod.Player).Sanitize(types, SpecialFarmAnimals.SAFETY_SAFE);
 
             return types;
         }

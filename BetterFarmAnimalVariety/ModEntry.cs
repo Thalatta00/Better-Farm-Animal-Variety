@@ -12,6 +12,9 @@ namespace BetterFarmAnimalVariety
     /// <summary>The mod entry point.</summary>
     public class ModEntry : Mod
     {
+        public const string BFAV_DIRECTORY = "Paritee's Better Farm Animal Variety";
+        public const string BFAV_CONFIG_FILENAME = "config.json";
+
         public ModConfig Config;
         public BetterPlayer Player;
         public AnimalShop AnimalShop;
@@ -60,7 +63,7 @@ namespace BetterFarmAnimalVariety
             this.Player = new BetterPlayer(Game1.player, this.Helper.Multiplayer.GetNewID);
 
             // Set up their Animal Shop
-            this.AnimalShop = new AnimalShop(this);
+            this.AnimalShop = new AnimalShop(this.Player, this.Config);
         }
 
         private void Display_RenderingActiveMenu(object sender, RenderingActiveMenuEventArgs e)

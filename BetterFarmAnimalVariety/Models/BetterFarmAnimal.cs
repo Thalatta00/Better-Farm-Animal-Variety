@@ -13,6 +13,7 @@ namespace BetterFarmAnimalVariety.Models
     {
         public const int HEALTH_DEFAULT = 3;
         public const long PARENT_ID_DEFAULT = -1L;
+        public const int FRIENDSHIP_STEP = 200;
 
         private const string NONE = "none";
 
@@ -36,6 +37,17 @@ namespace BetterFarmAnimalVariety.Models
         {
             this.Name = this.displayName = name;
             return name;
+        }
+
+        public void SetFriendshipHearts(int level)
+        {
+            this.friendshipTowardFarmer.Value = level * BetterFarmAnimal.FRIENDSHIP_STEP;
+        }
+
+        public void BecomeAnAdult()
+        {
+            this.age.Value = this.ageWhenMature.Value;
+            this.Sprite = this.DetermineSprite(this.Sprite.SpriteWidth, this.Sprite.SpriteHeight, FarmAnimalSprites.STARTING_FRAME);
         }
 
         public void AssignParent(long parentID)
@@ -67,7 +79,7 @@ namespace BetterFarmAnimalVariety.Models
             ((NetFieldBase<byte, NetByte>)this.harvestType).Set(Byte.Parse(DataArr[13]));
             ((NetFieldBase<bool, NetBool>)this.showDifferentTextureWhenReadyForHarvest).Set(Boolean.Parse(DataArr[14]));
             ((NetFieldBase<string, NetString>)this.buildingTypeILiveIn).Set(DataArr[15]);
-            this.Sprite = new AnimatedSprite(this.DetermineSpriteFilePath(), 0, Int32.Parse(DataArr[16]), Int32.Parse(DataArr[17]));
+            this.Sprite = this.DetermineSprite(Int32.Parse(DataArr[16]), Int32.Parse(DataArr[17]), FarmAnimalSprites.STARTING_FRAME);
             ((NetFieldBase<Rectangle, NetRectangle>)this.frontBackSourceRect).Set(new Rectangle(0, 0, Int32.Parse(DataArr[16]), Int32.Parse(DataArr[17])));
             ((NetFieldBase<Rectangle, NetRectangle>)this.sidewaysSourceRect).Set(new Rectangle(0, 0, Int32.Parse(DataArr[18]), Int32.Parse(DataArr[19])));
             ((NetFieldBase<byte, NetByte>)this.fullnessDrain).Set(Byte.Parse(DataArr[20]));
@@ -79,6 +91,11 @@ namespace BetterFarmAnimalVariety.Models
             ((NetFieldBase<int, NetInt>)this.price).Set(Int32.Parse(DataArr[24]));
 
             return true;
+        }
+
+        public AnimatedSprite DetermineSprite(int width, int height, int frame = FarmAnimalSprites.STARTING_FRAME)
+        {
+            return new AnimatedSprite(this.DetermineSpriteFilePath(), frame, width, height);
         }
 
         private string DetermineSpriteFilePath()

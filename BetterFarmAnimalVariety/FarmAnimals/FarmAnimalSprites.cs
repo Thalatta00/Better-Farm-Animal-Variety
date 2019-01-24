@@ -5,8 +5,9 @@ using System;
 
 namespace BetterFarmAnimalVariety.FarmAnimals
 {
-    class FarmAnimalSprites
+    public class FarmAnimalSprites
     {
+        public const int STARTING_FRAME = 0;
         private const string ASSET_DIRECTORY = "Animals\\";
         private const string BABY = "Baby";
 

@@ -10,11 +10,11 @@ namespace BetterFarmAnimalVariety.FarmAnimals
         public const byte SAFETY_UNSAFE = 0;
         public const byte SAFETY_SAFE = 1;
 
-        protected ModEntry Mod;
+        protected BetterPlayer Player;
 
-        public SpecialFarmAnimals(ModEntry mod)
+        public SpecialFarmAnimals(BetterPlayer player)
         {
-            this.Mod = mod;
+            this.Player = player;
         }
 
         public abstract string GetPrefix();
@@ -26,11 +26,11 @@ namespace BetterFarmAnimalVariety.FarmAnimals
 
         public bool HasSeenEvent(int eventID)
         {
-            return this.Mod.Player.HasSeenEvent(eventID);
+            return this.Player.HasSeenEvent(eventID);
         }
         public bool HasCompletedQuest(int questID)
         {
-            return this.Mod.Player.HasCompletedQuest(questID);
+            return this.Player.HasCompletedQuest(questID);
         }
 
         protected string DetermineSpecialType(string type)

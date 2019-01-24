@@ -16,6 +16,15 @@ namespace BetterFarmAnimalVariety.Menus
         {
             this.PurchaseFarmAnimals = new PurchaseFarmAnimals(mod);
             this.PurchaseAnimalsMenu = purchaseAnimalsMenu;
+
+            // @TODO: Add in more configuration for price (or hide it? or range possibilities from types?)
+            // Class:StardewValley.Menus.PurchaseAnimalsMenu
+            // ---
+            //string animalTitle = PurchaseAnimalsMenu.getAnimalTitle(this.hovered.hoverText);
+            //SpriteText.drawStringWithScrollBackground(b, animalTitle, this.xPositionOnScreen + IClickableMenu.spaceToClearSideBorder + 64, this.yPositionOnScreen + this.height - 32 + IClickableMenu.spaceToClearTopBorder / 2 + 8, "Truffle Pig", 1f, -1);
+            //SpriteText.drawStringWithScrollBackground(b, "$" + Game1.content.LoadString("Strings\\StringsFromCSFiles:LoadGameMenu.cs.11020", (object)this.hovered.item.salePrice()), this.xPositionOnScreen + IClickableMenu.spaceToClearSideBorder + 128, this.yPositionOnScreen + this.height + 64 + IClickableMenu.spaceToClearTopBorder / 2 + 8, "$99999999g", Game1.player.Money >= this.hovered.item.salePrice() ? 1f : 0.5f, -1);
+            //string animalDescription = PurchaseAnimalsMenu.getAnimalDescription(this.hovered.hoverText);
+            //IClickableMenu.drawHoverText(b, Game1.parseText(animalDescription, Game1.smallFont, 320), Game1.smallFont, 0, 0, -1, animalTitle, -1, (string[])null, (Item)null, 0, -1, -1, -1, -1, 1f, (CraftingRecipe)null);
         }
 
         private void HandleManualClose()

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BetterFarmAnimalVariety.Models;
+using System.Collections.Generic;
 
 namespace BetterFarmAnimalVariety.FarmAnimals
 {
@@ -9,9 +10,9 @@ namespace BetterFarmAnimalVariety.FarmAnimals
 
         private int AllowInShop;
 
-        public VoidFarmAnimals(ModEntry mod) : base(mod)
+        public VoidFarmAnimals(BetterPlayer player, ModConfig config) : base(player)
         {
-            this.AllowInShop = mod.Config.VoidFarmAnimalsInShop;
+            this.AllowInShop = config.VoidFarmAnimalsInShop;
         }
 
         public override string GetPrefix()
