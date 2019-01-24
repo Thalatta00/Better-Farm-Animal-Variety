@@ -4,17 +4,44 @@ Customize the types and species of farm animals you can raise without needing to
 
 ## Contents
 
-- [Install](#install)
+- [Get Started](#get-started)
 - [Configure](#configure)
 - [Extend](#extend)
 
-## Install
+## Get Started
+
+### Install
 
 1. Install the latest version of [SMAPI](https://smapi.io/)
 2. Install the latest version of [Content Patcher](https://www.nexusmods.com/stardewvalley/mods/1915)
-3. Download the mod files from [Nexus Games](https://www.nexusmods.com/stardewvalley/mods/3273)
+3. Download the [Paritee's Better Farm Animal Variety](https://www.nexusmods.com/stardewvalley/mods/3273) (BFAV) mod files from Nexus Mods
 4. Unzip the mod files into `Stardew Valley/Mods`
 5. Run the game using SMAPI
+
+### Add New Farm Animal
+
+The following section explains how to add a new farm animal with BFAV (if you do not want to use BFAV, see [Content Patcher only](#using-bfav-farm-animals-with-only-content-patcher)). In this example we will be using [Paritee's White Bull](https://www.nexusmods.com/stardewvalley/mods/3298) mod, but this can be done with any farm animal type that has been loaded into `Data/FarmAnimals`. See [Configure.FarmAnimals](#farmanimals) for more information on the `Types` field.
+
+1. Make sure you have [installed BFAV](#install)
+2. Unzip the [Paritee's White Bull](https://www.nexusmods.com/stardewvalley/mods/3298) folder into `Stardew Valley/Mods`
+3. Add "White Bull" to the `Cows.Types` array inside BFAV's `config.json`
+4. Run the game using SMAPI
+
+Your `Cows` section of the `config.json` should now look like the following:
+
+```json
+"Cows": {
+  "Name": "default",
+  "Description": "default",
+  "ShopIcon": "default",
+  "Types": [
+    "White Cow",
+    "Brown Cow",
+    "White Bull"
+  ]
+},
+```
+
 
 ## Configure
 
@@ -122,6 +149,52 @@ Here is a sample of a default `config.json` file:
 ```
 
 ### Extend
+
+#### Using BFAV Farm Animals with Only Content Patcher
+
+You cannot add a new farm animal without BFAV, but you can override and existing farm animal with a few modifications. Here is a method for overriding the `White Cow` with [Paritee's White Bull](https://www.nexusmods.com/stardewvalley/mods/3298). To do this, you need to change the following inside the farm animal mod's `content.json`:
+
+1. Change the `Data/FarmAnimals` `Entries` key to `White Cow`
+
+```json
+{
+  "Action": "EditData",
+  "Target": "Data/FarmAnimals",
+  "Entries": {
+    "White Cow": ..,
+  }
+},
+```
+
+2. Change the sprite `Target` paths to `White Cow`
+
+```json
+{
+  "Action": "Load",
+  "Target": "Animals/White Cow",
+  ..
+},
+{
+  "Action": "Load",
+  "Target": "Animals/BabyWhite Cow",
+  ..
+},
+```
+
+3. Change the localization `Data/FarmAnimals` `Field` keys to `White Cow` for each language
+
+```json
+{
+  "Action": "EditData",
+  "Target": "Data/FarmAnimals",
+  "Fields": {
+    "White Cow": ..,
+  },
+  "When": { "Language": "de" },
+},
+```
+
+#### Complimentary Mods
 
 - [Generate Farm Animal Data](https://paritee.github.io/#generate-data-farmanimals-entry)
 - [Paritee's Gender-Neutral Farm Animals](https://www.nexusmods.com/stardewvalley/mods/3289)
