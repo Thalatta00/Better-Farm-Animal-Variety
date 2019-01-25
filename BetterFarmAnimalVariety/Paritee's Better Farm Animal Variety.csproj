@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Editors\AnimalShopEditor.cs" />
-    <Compile Include="Helpers\AppSettings.cs" />
+    <Compile Include="Models\AppSettings.cs" />
     <Compile Include="Models\AppSetting.cs" />
     <Compile Include="Models\ConfigFarmAnimal.cs" />
     <Compile Include="Editors\AnimalBirthEditor.cs" />
