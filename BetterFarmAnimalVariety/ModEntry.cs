@@ -20,6 +20,7 @@ namespace BetterFarmAnimalVariety
         public const string BFAV_CONFIG_FILENAME = "config.json";
 
         public ModConfig Config;
+
         public Player Player;
         public Blue BlueFarmAnimals;
         public Void VoidFarmAnimals;
@@ -32,6 +33,8 @@ namespace BetterFarmAnimalVariety
         /// <param name="helper">Provides simplified APIs for writing mods.</param>
         public override void Entry(IModHelper helper)
         {
+            System.Diagnostics.Trace.WriteLine("Hello world");
+
             // Config
             this.Config = this.LoadConfig();
 
@@ -122,16 +125,6 @@ namespace BetterFarmAnimalVariety
             Paritee.StardewValleyAPI.Menus.PurchaseFarmAnimalMenu PurchaseFarmAnimalMenu = new Paritee.StardewValleyAPI.Menus.PurchaseFarmAnimalMenu(purchaseAnimalsMenu, purchaseFarmAnimal);
 
             PurchaseFarmAnimalMenu.HandleTap(e);
-        }
-
-        public void Log(string message, LogLevel logLevel = LogLevel.Debug)
-        {
-            this.Monitor.Log(message, logLevel);
-
-            if (logLevel.Equals(LogLevel.Trace))
-                System.Diagnostics.Trace.WriteLine(message);
-            else
-                System.Diagnostics.Debug.WriteLine(message);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using BetterFarmAnimalVariety.Helpers;
-using BetterFarmAnimalVariety.Models;
+﻿using BetterFarmAnimalVariety.Models;
 using Paritee.StardewValleyAPI.Buidlings.AnimalShop.FarmAnimals;
 using Paritee.StardewValleyAPI.FarmAnimals.Variations;
 using System.Collections.Generic;

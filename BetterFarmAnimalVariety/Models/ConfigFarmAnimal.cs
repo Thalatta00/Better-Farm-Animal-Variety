@@ -1,31 +1,34 @@
 ﻿using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Paritee.StardewValleyAPI.Buidlings.AnimalShop.FarmAnimals;
+using Paritee.StardewValleyAPI.Utilities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace BetterFarmAnimalVariety.Models
 {
     public class ConfigFarmAnimal
     {
+        [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeGroup
         {
-            [Description("Cows")]
+            [EnumMember(Value = "Cows")]
             Cow,
-            [Description("Chickens")]
+            [EnumMember(Value = "Chickens")]
             Chicken,
-            [Description("Sheep")]
+            [EnumMember(Value = "Sheep")]
             Sheep,
-            [Description("Goats")]
+            [EnumMember(Value = "Goats")]
             Goat,
-            [Description("Pigs")]
+            [EnumMember(Value = "Pigs")]
             Pig,
-            [Description("Ducks")]
+            [EnumMember(Value = "Ducks")]
             Duck,
-            [Description("Rabbits")]
+            [EnumMember(Value = "Rabbits")]
             Rabbit,
-            [Description("Dinosaurs")]
+            [EnumMember(Value = "Dinosaurs")]
             Dinosaur
         }
 
@@ -94,7 +97,7 @@ namespace BetterFarmAnimalVariety.Models
         public ConfigFarmAnimal(AppSetting appSetting)
         {
             string[] Values = appSetting.SplitValue();
-
+            
             this.Group = this.ConvertStringToTypeGroup(appSetting.SplitKey()[AppSetting.FARMANIMALS_GROUP_INDEX]);
             this.AnimalShopNameID = Values[AppSetting.FARMANIMALS_ANIMAL_SHOP_NAME_ID_INDEX];
             this.AnimalShopDescriptionID = Values[AppSetting.FARMANIMALS_ANIMAL_SHOP_DESCRIPTION_ID_INDEX];
@@ -177,7 +180,9 @@ namespace BetterFarmAnimalVariety.Models
 
             foreach (ConfigFarmAnimal.TypeGroup typeGroup in values)
             {
-                if (str.Equals(typeGroup.ToString()))
+                string description = Enums.GetValue(typeGroup);
+
+                if (str.Equals(description))
                     return typeGroup;
             }
 
