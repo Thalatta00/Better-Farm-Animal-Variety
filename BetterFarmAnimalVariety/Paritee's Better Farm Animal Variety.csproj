@@ -36,9 +36,13 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Paritee.StardewValleyAPI, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Paritee.StardewValleyAPI.1.1.0\lib\net452\Paritee.StardewValleyAPI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,37 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Content\Data.cs" />
-    <Compile Include="Content\Data_Blueprints.cs" />
     <Compile Include="Editors\AnimalShopEditor.cs" />
-    <Compile Include="Editors\ContentPackEditor.cs" />
-    <Compile Include="Helpers\AppSettings.cs" />
-    <Compile Include="Loaders\ContentPackLoader.cs" />
-    <Compile Include="Menus\BetterNamingMenu.cs" />
-    <Compile Include="Models\AnimalShop.cs" />
+    <Compile Include="Models\AppSettings.cs" />
     <Compile Include="Models\AppSetting.cs" />
     <Compile Include="Models\ConfigFarmAnimal.cs" />
-    <Compile Include="Models\ContentPack.cs" />
-    <Compile Include="Models\ContentPackContent.cs" />
-    <Compile Include="Models\FarmAnimalStock.cs" />
-    <Compile Include="Content\Data_FarmAnimals.cs" />
-    <Compile Include="FarmAnimals\FarmAnimalSprites.cs" />
-    <Compile Include="FarmAnimals\FarmAnimalTypes.cs" />
-    <Compile Include="Models\BetterPlayer.cs" />
-    <Compile Include="Player\PurchaseFarmAnimals.cs" />
-    <Compile Include="FarmAnimals\SpecialFarmAnimals.cs" />
-    <Compile Include="FarmAnimals\VoidFarmAnimals.cs" />
-    <Compile Include="Menus\ActiveClickableMenu.cs" />
-    <Compile Include="Menus\BaseMenu.cs" />
-    <Compile Include="Menus\NameFarmAnimalMenu.cs" />
-    <Compile Include="Menus\PurchaseFarmAnimalMenu.cs" />
-    <Compile Include="Models\BetterFarmAnimal.cs" />
-    <Compile Include="FarmAnimals\BlueFarmAnimals.cs" />
     <Compile Include="Editors\AnimalBirthEditor.cs" />
     <Compile Include="ModConfig.cs" />
-    <Compile Include="Models\Incubator.cs" />
     <Compile Include="ModEntry.cs" />
-    <Compile Include="Player\BreedFarmAnimals.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -89,28 +69,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="i18n\br.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="i18n\es.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="i18n\zh.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="i18n\de.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="i18n\ja.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="i18n\pt.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="i18n\ru.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="i18n\default.json">
+    <None Include="i18n\*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="manifest.json" />
@@ -123,33 +82,8 @@
   <ItemGroup>
     <Analyzer Include="..\packages\Pathoschild.Stardew.ModBuildConfig.2.2.0\analyzers\dotnet\cs\StardewModdingAPI.ModBuildConfig.Analyzer.dll" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="assets\animal_shop_brown_cows.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\animal_shop_chickens.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\animal_shop_dairy_cows.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\animal_shop_ducks.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\animal_shop_goats.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\animal_shop_hogs.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\animal_shop_pigs.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\animal_shop_rabbits.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\animal_shop_sheep.png">
+    <Content Include="assets\*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

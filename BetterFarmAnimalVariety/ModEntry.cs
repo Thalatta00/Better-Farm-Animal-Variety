@@ -1,11 +1,15 @@
 ﻿using BetterFarmAnimalVariety.Editors;
-using BetterFarmAnimalVariety.Loaders;
-using BetterFarmAnimalVariety.Menus;
-using BetterFarmAnimalVariety.Models;
+using Paritee.StardewValleyAPI.Buidlings.AnimalShop;
+using Paritee.StardewValleyAPI.Buidlings.AnimalShop.FarmAnimals;
+using Paritee.StardewValleyAPI.FarmAnimals.Variations;
+using Paritee.StardewValleyAPI.Menus;
+using Paritee.StardewValleyAPI.Players;
+using Paritee.StardewValleyAPI.Players.Actions;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
 using StardewValley.Menus;
+using System.Collections.Generic;
 
 namespace BetterFarmAnimalVariety
 {
@@ -16,7 +20,10 @@ namespace BetterFarmAnimalVariety
         public const string BFAV_CONFIG_FILENAME = "config.json";
 
         public ModConfig Config;
-        public BetterPlayer Player;
+
+        public Player Player;
+        public Blue BlueFarmAnimals;
+        public Void VoidFarmAnimals;
         public AnimalShop AnimalShop;
 
         /*********
@@ -26,20 +33,14 @@ namespace BetterFarmAnimalVariety
         /// <param name="helper">Provides simplified APIs for writing mods.</param>
         public override void Entry(IModHelper helper)
         {
+            System.Diagnostics.Trace.WriteLine("Hello world");
+
+            // Config
             this.Config = this.LoadConfig();
 
             // Asset Editors
             this.Helper.Content.AssetEditors.Add(new AnimalBirthEditor(this));
             this.Helper.Content.AssetEditors.Add(new AnimalShopEditor(this));
-
-            // Content Packs
-            foreach (IContentPack contentPack in this.Helper.ContentPacks.GetOwned())
-            {
-                ContentPack ContentPack = new ContentPack(contentPack);
-
-                this.Helper.Content.AssetEditors.Add(new ContentPackEditor(this, ContentPack));
-                this.Helper.Content.AssetLoaders.Add(new ContentPackLoader(ContentPack));
-            }
 
             // Events
             this.Helper.Events.GameLoop.SaveLoaded += this.GameLoop_SaveLoaded;
@@ -50,20 +51,30 @@ namespace BetterFarmAnimalVariety
         private ModConfig LoadConfig()
         {
             // Load up the config
-            ModConfig Config = this.Helper.ReadConfig<ModConfig>();
+            ModConfig config = this.Helper.ReadConfig<ModConfig>();
 
             // Set up the default values
-            Config.UpdateFarmAnimalValuesFromAppSettings();
+            config.UpdateFarmAnimalValuesFromAppSettings();
 
-            return Config;
+            return config;
         }
 
         private void GameLoop_SaveLoaded(object sender, SaveLoadedEventArgs e)
         {
-            this.Player = new BetterPlayer(Game1.player, this.Helper.Multiplayer.GetNewID);
+            this.Player = new Player(Game1.player, this.Helper);
 
-            // Set up their Animal Shop
-            this.AnimalShop = new AnimalShop(this.Player, this.Config);
+            // Set up everything else
+            BlueConfig blueConfig = new BlueConfig(this.Player.HasSeenEvent(Blue.EVENT_ID));
+            this.BlueFarmAnimals = new Blue(blueConfig);
+
+            VoidConfig voidConfig = new VoidConfig(this.Config.VoidFarmAnimalsInShop, this.Player.HasCompletedQuest(Void.QUEST_ID));
+            this.VoidFarmAnimals = new Void(voidConfig);
+
+            Dictionary<Stock.Name, string[]> available = this.Config.MapFarmAnimalsToAvailableAnimalShopStock();
+            StockConfig stockConfig = new StockConfig(available, this.BlueFarmAnimals, this.VoidFarmAnimals);
+            Stock stock = new Stock(stockConfig);
+
+            this.AnimalShop = new AnimalShop(stock);
         }
 
         private void Display_RenderingActiveMenu(object sender, RenderingActiveMenuEventArgs e)
@@ -72,17 +83,21 @@ namespace BetterFarmAnimalVariety
             if (!Context.IsWorldReady || Game1.activeClickableMenu == null)
                 return;
 
-            NamingMenu NamingMenu = Game1.activeClickableMenu as NamingMenu;
+            StardewValley.Menus.NamingMenu namingMenu = Game1.activeClickableMenu as StardewValley.Menus.NamingMenu;
 
-            if (NamingMenu == null)
+            if (namingMenu == null)
                 return;
 
-            if (NamingMenu.GetType() != typeof(StardewValley.Menus.NamingMenu))
+            if (namingMenu.GetType() != typeof(StardewValley.Menus.NamingMenu))
                 return;
 
-            NameFarmAnimalMenu NameFarmAnimalMenu = new NameFarmAnimalMenu(this, NamingMenu);
+            List<string> loadedTypes = this.Config.GetFarmAnimalTypes();
+            BreedFarmAnimalConfig breedFarmAnimalConfig = new BreedFarmAnimalConfig(loadedTypes, this.BlueFarmAnimals);
+            BreedFarmAnimal breedFarmAnimal = new BreedFarmAnimal(this.Player, breedFarmAnimalConfig);
 
-            NameFarmAnimalMenu.HandleChange();
+            NameFarmAnimalMenu nameFarmAnimalMenu = new NameFarmAnimalMenu(namingMenu, breedFarmAnimal);
+
+            nameFarmAnimalMenu.HandleChange();
         }
         
         private void Input_ButtonPressed(object sender, ButtonPressedEventArgs e)
@@ -95,30 +110,21 @@ namespace BetterFarmAnimalVariety
             if (e.Button != SButton.MouseLeft)
                     return;
 
-            ActiveClickableMenu ActiveClickableMenu = new ActiveClickableMenu(this);
+            ActiveClickableMenu activeClickableMenu = new ActiveClickableMenu(Game1.activeClickableMenu);
 
-            if (!ActiveClickableMenu.IsOpen())
+            if (!activeClickableMenu.IsOpen())
                 return;
 
             // Purchasing a new animal
-            PurchaseAnimalsMenu PurchaseAnimalsMenu = ActiveClickableMenu.GetMenu() as PurchaseAnimalsMenu;
+            PurchaseAnimalsMenu purchaseAnimalsMenu = activeClickableMenu.GetMenu() as PurchaseAnimalsMenu;
 
-            if (PurchaseAnimalsMenu == null)
+            if (purchaseAnimalsMenu == null)
                 return;
 
-            PurchaseFarmAnimalMenu PurchaseFarmAnimalMenu = new PurchaseFarmAnimalMenu(this, PurchaseAnimalsMenu);
+            PurchaseFarmAnimal purchaseFarmAnimal = new PurchaseFarmAnimal(this.Player, this.AnimalShop);
+            Paritee.StardewValleyAPI.Menus.PurchaseFarmAnimalMenu purchaseFarmAnimalMenu = new Paritee.StardewValleyAPI.Menus.PurchaseFarmAnimalMenu(purchaseAnimalsMenu, purchaseFarmAnimal);
 
-            PurchaseFarmAnimalMenu.HandleTap(e);
-        }
-
-        public void Log(string message, LogLevel logLevel = LogLevel.Debug)
-        {
-            this.Monitor.Log(message, logLevel);
-
-            if (logLevel.Equals(LogLevel.Trace))
-                System.Diagnostics.Trace.WriteLine(message);
-            else
-                System.Diagnostics.Debug.WriteLine(message);
+            purchaseFarmAnimalMenu.HandleTap(e);
         }
     }
 }

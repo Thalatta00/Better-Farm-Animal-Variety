@@ -1,26 +1,54 @@
 ﻿using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Paritee.StardewValleyAPI.Buidlings.AnimalShop.FarmAnimals;
+using Paritee.StardewValleyAPI.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace BetterFarmAnimalVariety.Models
 {
     public class ConfigFarmAnimal
     {
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum TypeGroup
+        {
+            [EnumMember(Value = "Cows")]
+            Cow,
+            [EnumMember(Value = "Chickens")]
+            Chicken,
+            [EnumMember(Value = "Sheep")]
+            Sheep,
+            [EnumMember(Value = "Goats")]
+            Goat,
+            [EnumMember(Value = "Pigs")]
+            Pig,
+            [EnumMember(Value = "Ducks")]
+            Duck,
+            [EnumMember(Value = "Rabbits")]
+            Rabbit,
+            [EnumMember(Value = "Dinosaurs")]
+            Dinosaur
+        }
+
         public const string DEFAULT = "default";
         public const string ANIMAL_SHOP_TO_AREA_X = "X";
         public const string ANIMAL_SHOP_TO_AREA_Y = "Y";
         public const string ANIMAL_SHOP_TO_AREA_WIDTH = "Width";
         public const string ANIMAL_SHOP_TO_AREA_HEIGHT = "Height";
 
-        public string Group;
+        public ConfigFarmAnimal.TypeGroup Group;
         public string AnimalShopNameID;
         public string AnimalShopDescriptionID;
         public Dictionary<string, int> AnimalShopIconToArea;
+
         [JsonIgnore]
         public string ConfigName;
+
         [JsonIgnore]
         public string ConfigDescription;
+
         [JsonIgnore]
         public string ConfigAnimalShopIcon;
 
@@ -36,6 +64,7 @@ namespace BetterFarmAnimalVariety.Models
                 this.ConfigName = value;
             }
         }
+
         [JsonProperty(Order = 2)]
         public string Description
         {
@@ -48,6 +77,7 @@ namespace BetterFarmAnimalVariety.Models
                 this.ConfigDescription = value;
             }
         }
+
         [JsonProperty(Order = 3)]
         public string ShopIcon
         {
@@ -60,6 +90,7 @@ namespace BetterFarmAnimalVariety.Models
                 this.ConfigAnimalShopIcon = value;
             }
         }
+
         [JsonProperty(Order = 4)]
         public string[] Types;
 
@@ -72,8 +103,8 @@ namespace BetterFarmAnimalVariety.Models
         public ConfigFarmAnimal(AppSetting appSetting)
         {
             string[] Values = appSetting.SplitValue();
-
-            this.Group = appSetting.SplitKey()[AppSetting.FARMANIMALS_GROUP_INDEX];
+            
+            this.Group = this.ConvertStringToTypeGroup(appSetting.SplitKey()[AppSetting.FARMANIMALS_GROUP_INDEX]);
             this.AnimalShopNameID = Values[AppSetting.FARMANIMALS_ANIMAL_SHOP_NAME_ID_INDEX];
             this.AnimalShopDescriptionID = Values[AppSetting.FARMANIMALS_ANIMAL_SHOP_DESCRIPTION_ID_INDEX];
 
@@ -142,6 +173,49 @@ namespace BetterFarmAnimalVariety.Models
             this.AnimalShopNameID = Reset.AnimalShopNameID;
             this.AnimalShopDescriptionID = Reset.AnimalShopDescriptionID;
             this.AnimalShopIconToArea = Reset.AnimalShopIconToArea;
+        }
+
+        public Stock.Name GetStockName()
+        {
+            return this.ConvertTypeGroupToStockName(this.Group);
+        }
+
+        private ConfigFarmAnimal.TypeGroup ConvertStringToTypeGroup(string str)
+        {
+            Array values = Enum.GetValues(typeof(ConfigFarmAnimal.TypeGroup));
+
+            foreach (ConfigFarmAnimal.TypeGroup typeGroup in values)
+            {
+                string description = Enums.GetValue(typeGroup);
+
+                if (str.Equals(description))
+                    return typeGroup;
+            }
+
+            throw new Exception();
+        }
+
+        private Stock.Name ConvertTypeGroupToStockName(ConfigFarmAnimal.TypeGroup key)
+        {
+            switch (key)
+            {
+                case ConfigFarmAnimal.TypeGroup.Cow:
+                    return Stock.Name.DairyCow;
+                case ConfigFarmAnimal.TypeGroup.Chicken:
+                    return Stock.Name.Chicken;
+                case ConfigFarmAnimal.TypeGroup.Sheep:
+                    return Stock.Name.Sheep;
+                case ConfigFarmAnimal.TypeGroup.Goat:
+                    return Stock.Name.Goat;
+                case ConfigFarmAnimal.TypeGroup.Pig:
+                    return Stock.Name.Pig;
+                case ConfigFarmAnimal.TypeGroup.Duck:
+                    return Stock.Name.Duck;
+                case ConfigFarmAnimal.TypeGroup.Rabbit:
+                    return Stock.Name.Rabbit;
+                default:
+                    throw new StockDoesNotExistException();
+            }
         }
     }
 }
