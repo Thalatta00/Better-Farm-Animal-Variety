@@ -51,12 +51,12 @@ namespace BetterFarmAnimalVariety
         private ModConfig LoadConfig()
         {
             // Load up the config
-            ModConfig Config = this.Helper.ReadConfig<ModConfig>();
+            ModConfig config = this.Helper.ReadConfig<ModConfig>();
 
             // Set up the default values
-            Config.UpdateFarmAnimalValuesFromAppSettings();
+            config.UpdateFarmAnimalValuesFromAppSettings();
 
-            return Config;
+            return config;
         }
 
         private void GameLoop_SaveLoaded(object sender, SaveLoadedEventArgs e)
@@ -110,21 +110,21 @@ namespace BetterFarmAnimalVariety
             if (e.Button != SButton.MouseLeft)
                     return;
 
-            ActiveClickableMenu ActiveClickableMenu = new ActiveClickableMenu(Game1.activeClickableMenu);
+            ActiveClickableMenu activeClickableMenu = new ActiveClickableMenu(Game1.activeClickableMenu);
 
-            if (!ActiveClickableMenu.IsOpen())
+            if (!activeClickableMenu.IsOpen())
                 return;
 
             // Purchasing a new animal
-            PurchaseAnimalsMenu purchaseAnimalsMenu = ActiveClickableMenu.GetMenu() as PurchaseAnimalsMenu;
+            PurchaseAnimalsMenu purchaseAnimalsMenu = activeClickableMenu.GetMenu() as PurchaseAnimalsMenu;
 
             if (purchaseAnimalsMenu == null)
                 return;
 
             PurchaseFarmAnimal purchaseFarmAnimal = new PurchaseFarmAnimal(this.Player, this.AnimalShop);
-            Paritee.StardewValleyAPI.Menus.PurchaseFarmAnimalMenu PurchaseFarmAnimalMenu = new Paritee.StardewValleyAPI.Menus.PurchaseFarmAnimalMenu(purchaseAnimalsMenu, purchaseFarmAnimal);
+            Paritee.StardewValleyAPI.Menus.PurchaseFarmAnimalMenu purchaseFarmAnimalMenu = new Paritee.StardewValleyAPI.Menus.PurchaseFarmAnimalMenu(purchaseAnimalsMenu, purchaseFarmAnimal);
 
-            PurchaseFarmAnimalMenu.HandleTap(e);
+            purchaseFarmAnimalMenu.HandleTap(e);
         }
     }
 }

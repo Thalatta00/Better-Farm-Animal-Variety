@@ -15,11 +15,11 @@ namespace BetterFarmAnimalVariety
 
         public ModConfig()
         {
-            Dictionary<string, string> Settings = Properties.Settings.Default.Properties
+            Dictionary<string, string> settings = Properties.Settings.Default.Properties
               .Cast<System.Configuration.SettingsProperty>()
               .OrderBy(s => s.Name).ToDictionary(x => x.Name.ToString(), x => x.DefaultValue.ToString());
 
-            this.AppSettings = new AppSettings(Settings);
+            this.AppSettings = new AppSettings(settings);
             this.VoidFarmAnimalsInShop = VoidConfig.InShop.Never;
 
             this.InitializeFarmAnimals();
@@ -32,12 +32,12 @@ namespace BetterFarmAnimalVariety
 
         public List<string> GetFarmAnimalTypes()
         {
-            List<string> Types = new List<string>();
+            List<string> types = new List<string>();
 
             foreach (KeyValuePair<ConfigFarmAnimal.TypeGroup, ConfigFarmAnimal> Entry in this.FarmAnimals)
-                Types = Types.Concat(Entry.Value.GetTypes()).ToList<string>();
+                types = types.Concat(Entry.Value.GetTypes()).ToList<string>();
 
-            return Types.ToList<string>();
+            return types.ToList<string>();
         }
 
         public List<string> GetFarmAnimalTypes(ConfigFarmAnimal.TypeGroup farmAnimalGroup)
@@ -59,26 +59,28 @@ namespace BetterFarmAnimalVariety
 
         public void UpdateFarmAnimalValuesFromAppSettings()
         {
-            List<AppSetting> FarmAnimalAppSettings = this.AppSettings.FindFarmAnimalAppSettings();
+            List<AppSetting> appSettings = this.AppSettings.FindFarmAnimalAppSettings();
 
-            foreach (AppSetting AppSetting in FarmAnimalAppSettings)
+            foreach (AppSetting appSetting in appSettings)
             {
-                ConfigFarmAnimal ConfigFarmAnimal = new ConfigFarmAnimal(AppSetting);
+                ConfigFarmAnimal configFarmAnimal = new ConfigFarmAnimal(appSetting);
                   
-                if (this.FarmAnimals.ContainsKey(ConfigFarmAnimal.Group))
+                if (this.FarmAnimals.ContainsKey(configFarmAnimal.Group))
                 {
                     // Preserve user preferences if the group already has data loaded from the user's config JSON
-                    ConfigFarmAnimal.Name = this.FarmAnimals[ConfigFarmAnimal.Group].Name;
-                    ConfigFarmAnimal.Description = this.FarmAnimals[ConfigFarmAnimal.Group].Description;
-                    ConfigFarmAnimal.ShopIcon = this.FarmAnimals[ConfigFarmAnimal.Group].ShopIcon;
-                    ConfigFarmAnimal.Types = this.FarmAnimals[ConfigFarmAnimal.Group].Types;
+                    ConfigFarmAnimal custom = this.FarmAnimals[configFarmAnimal.Group];
+
+                    configFarmAnimal.Name = custom.Name;
+                    configFarmAnimal.Description = custom.Description;
+                    configFarmAnimal.ShopIcon = custom.ShopIcon;
+                    configFarmAnimal.Types = custom.Types;
 
                     // Add the configuration to the farm animals config
-                    this.FarmAnimals[ConfigFarmAnimal.Group] = ConfigFarmAnimal;
+                    this.FarmAnimals[configFarmAnimal.Group] = configFarmAnimal;
                 }
                 else
                 {
-                    this.FarmAnimals.Add(ConfigFarmAnimal.Group, ConfigFarmAnimal);
+                    this.FarmAnimals.Add(configFarmAnimal.Group, configFarmAnimal);
                 }
             }
         }

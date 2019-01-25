@@ -42,10 +42,13 @@ namespace BetterFarmAnimalVariety.Models
         public string AnimalShopNameID;
         public string AnimalShopDescriptionID;
         public Dictionary<string, int> AnimalShopIconToArea;
+
         [JsonIgnore]
         public string ConfigName;
+
         [JsonIgnore]
         public string ConfigDescription;
+
         [JsonIgnore]
         public string ConfigAnimalShopIcon;
 
@@ -61,6 +64,7 @@ namespace BetterFarmAnimalVariety.Models
                 this.ConfigName = value;
             }
         }
+
         [JsonProperty(Order = 2)]
         public string Description
         {
@@ -73,6 +77,7 @@ namespace BetterFarmAnimalVariety.Models
                 this.ConfigDescription = value;
             }
         }
+
         [JsonProperty(Order = 3)]
         public string ShopIcon
         {
@@ -85,6 +90,7 @@ namespace BetterFarmAnimalVariety.Models
                 this.ConfigAnimalShopIcon = value;
             }
         }
+
         [JsonProperty(Order = 4)]
         public string[] Types;
 
