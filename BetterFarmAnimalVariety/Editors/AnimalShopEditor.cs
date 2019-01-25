@@ -48,27 +48,27 @@ namespace BetterFarmAnimalVariety.Editors
 
         private void Strings_StringsFromCSFiles(IAssetData asset)
         {
-            IDictionary<string, string> Strings = asset.AsDictionary<string, string>().Data;
+            IDictionary<string, string> strings = asset.AsDictionary<string, string>().Data;
 
-            foreach (KeyValuePair<string, ConfigFarmAnimal> Entry in this.Mod.Config.FarmAnimals)
+            foreach (KeyValuePair<ConfigFarmAnimal.TypeGroup, ConfigFarmAnimal> entry in this.Mod.Config.FarmAnimals)
             {
                 // Set the new name
-                if (!Entry.Value.IsDefault(Entry.Value.Name))
-                    this.EditAnimalShopName(Entry.Value, Strings);
+                if (!entry.Value.IsDefault(entry.Value.Name))
+                    this.EditAnimalShopName(entry.Value, strings);
 
                 // Set the new desciption
-                if (!Entry.Value.IsDefault(Entry.Value.Description))
-                    this.EditAnimalShopDescription(Entry.Value, Strings);
+                if (!entry.Value.IsDefault(entry.Value.Description))
+                    this.EditAnimalShopDescription(entry.Value, strings);
             }
         }
 
         private void LooseSprites_Cursors(IAssetData asset)
         {
-            foreach (KeyValuePair<string, ConfigFarmAnimal> Entry in this.Mod.Config.FarmAnimals)
+            foreach (KeyValuePair<ConfigFarmAnimal.TypeGroup, ConfigFarmAnimal> entry in this.Mod.Config.FarmAnimals)
             {
                 // Set the new icon
-                if (!Entry.Value.IsDefault(Entry.Value.ShopIcon))
-                    this.EditAnimalShopIcon(Entry.Value, asset);
+                if (!entry.Value.IsDefault(entry.Value.ShopIcon))
+                    this.EditAnimalShopIcon(entry.Value, asset);
             }
         }
 

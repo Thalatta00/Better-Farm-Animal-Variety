@@ -1,19 +1,41 @@
 ﻿using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
+using Paritee.StardewValleyAPI.Buidlings.AnimalShop.FarmAnimals;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace BetterFarmAnimalVariety.Models
 {
     public class ConfigFarmAnimal
     {
+        public enum TypeGroup
+        {
+            [Description("Cows")]
+            Cow,
+            [Description("Chickens")]
+            Chicken,
+            [Description("Sheep")]
+            Sheep,
+            [Description("Goats")]
+            Goat,
+            [Description("Pigs")]
+            Pig,
+            [Description("Ducks")]
+            Duck,
+            [Description("Rabbits")]
+            Rabbit,
+            [Description("Dinosaurs")]
+            Dinosaur
+        }
+
         public const string DEFAULT = "default";
         public const string ANIMAL_SHOP_TO_AREA_X = "X";
         public const string ANIMAL_SHOP_TO_AREA_Y = "Y";
         public const string ANIMAL_SHOP_TO_AREA_WIDTH = "Width";
         public const string ANIMAL_SHOP_TO_AREA_HEIGHT = "Height";
 
-        public string Group;
+        public ConfigFarmAnimal.TypeGroup Group;
         public string AnimalShopNameID;
         public string AnimalShopDescriptionID;
         public Dictionary<string, int> AnimalShopIconToArea;
@@ -73,7 +95,7 @@ namespace BetterFarmAnimalVariety.Models
         {
             string[] Values = appSetting.SplitValue();
 
-            this.Group = appSetting.SplitKey()[AppSetting.FARMANIMALS_GROUP_INDEX];
+            this.Group = this.ConvertStringToTypeGroup(appSetting.SplitKey()[AppSetting.FARMANIMALS_GROUP_INDEX]);
             this.AnimalShopNameID = Values[AppSetting.FARMANIMALS_ANIMAL_SHOP_NAME_ID_INDEX];
             this.AnimalShopDescriptionID = Values[AppSetting.FARMANIMALS_ANIMAL_SHOP_DESCRIPTION_ID_INDEX];
 
@@ -142,6 +164,47 @@ namespace BetterFarmAnimalVariety.Models
             this.AnimalShopNameID = Reset.AnimalShopNameID;
             this.AnimalShopDescriptionID = Reset.AnimalShopDescriptionID;
             this.AnimalShopIconToArea = Reset.AnimalShopIconToArea;
+        }
+
+        public Stock.Name GetStockName()
+        {
+            return this.ConvertTypeGroupToStockName(this.Group);
+        }
+
+        private ConfigFarmAnimal.TypeGroup ConvertStringToTypeGroup(string str)
+        {
+            Array values = Enum.GetValues(typeof(ConfigFarmAnimal.TypeGroup));
+
+            foreach (ConfigFarmAnimal.TypeGroup typeGroup in values)
+            {
+                if (str.Equals(typeGroup.ToString()))
+                    return typeGroup;
+            }
+
+            throw new Exception();
+        }
+
+        private Stock.Name ConvertTypeGroupToStockName(ConfigFarmAnimal.TypeGroup key)
+        {
+            switch (key)
+            {
+                case ConfigFarmAnimal.TypeGroup.Cow:
+                    return Stock.Name.DairyCow;
+                case ConfigFarmAnimal.TypeGroup.Chicken:
+                    return Stock.Name.Chicken;
+                case ConfigFarmAnimal.TypeGroup.Sheep:
+                    return Stock.Name.Sheep;
+                case ConfigFarmAnimal.TypeGroup.Goat:
+                    return Stock.Name.Goat;
+                case ConfigFarmAnimal.TypeGroup.Pig:
+                    return Stock.Name.Pig;
+                case ConfigFarmAnimal.TypeGroup.Duck:
+                    return Stock.Name.Duck;
+                case ConfigFarmAnimal.TypeGroup.Rabbit:
+                    return Stock.Name.Rabbit;
+                default:
+                    throw new StockDoesNotExistException();
+            }
         }
     }
 }
