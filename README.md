@@ -6,7 +6,7 @@ Customize the types and species of farm animals you can raise without needing to
 
 - [Get Started](#get-started)
 - [Configure](#configure)
-- [Extend](#extend)
+- [For Modders](#for-modders)
 
 ## Get Started
 
@@ -148,7 +148,25 @@ Here is a sample of a default `config.json` file:
 }
 ```
 
-### Extend
+### For Modders
+
+#### BetterFarmAnimalVarietyAPI
+
+See [SMAPI Modder Guide](https://stardewvalleywiki.com/Modding:Modder_Guide/APIs/Integrations#Using_an_API) for usage. Requires [Paritee.StardewValleyAPI](https://github.com/paritee/Paritee.StardewValleyAPI).
+
+```c#
+/// <param name="player">Paritee.StardewValleyAPI.Players</param>
+/// <returns>Returns Paritee.StardewValleyAPI.FarmAnimals.Variations.Blue</returns>
+public Blue GetBlueFarmAnimals(Player player);
+
+/// <param name="player">Paritee.StardewValleyAPI.Players</param>
+/// <returns>Returns Paritee.StardewValleyAPI.FarmAnimals.Variations.Void</returns>
+public Void GetVoidFarmAnimals(Player player);
+
+/// <param name="player">Paritee.StardewValleyAPI.Players</param>
+/// <returns>Returns Paritee.StardewValleyAPI.Buidlings.AnimalShop</returns>
+public AnimalShop GetAnimalShop(Player player)
+```
 
 #### Using BFAV Farm Animals with Only Content Patcher
 
