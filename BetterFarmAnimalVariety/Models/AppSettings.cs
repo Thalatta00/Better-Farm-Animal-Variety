@@ -1,7 +1,6 @@
-﻿using BetterFarmAnimalVariety.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace BetterFarmAnimalVariety.Helpers
+namespace BetterFarmAnimalVariety.Models
 {
     public class AppSettings
     {
