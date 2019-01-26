@@ -53,9 +53,9 @@ You can configure your mod at `Stardew Valley/Mods/Paritee's Better Farm Animal 
 
 | Value  | Description |
 | ------------- | ------------- |
-| `0` | Void farm animals will never be available in [Marnie's animal shop](https://stardewvalleywiki.com/Marnie%27s_Ranch#Livestock) (default) |
-| `1` | Void farm animals will only be available in [Marnie's animal shop](https://stardewvalleywiki.com/Marnie%27s_Ranch#Livestock) if the player has completed the [Goblin Problem](https://stardewvalleywiki.com/Quests#Goblin_Problem) quest |
-| `2` | Void farm animals are always availabe in [Marnie's animal shop](https://stardewvalleywiki.com/Marnie%27s_Ranch#Livestock) |
+| `Never` | Void farm animals will never be available in [Marnie's animal shop](https://stardewvalleywiki.com/Marnie%27s_Ranch#Livestock) (default) |
+| `QuestOnly` | Void farm animals will only be available in [Marnie's animal shop](https://stardewvalleywiki.com/Marnie%27s_Ranch#Livestock) if the player has completed the [Goblin Problem](https://stardewvalleywiki.com/Quests#Goblin_Problem) quest |
+| `Always` | Void farm animals are always availabe in [Marnie's animal shop](https://stardewvalleywiki.com/Marnie%27s_Ranch#Livestock) |
 
 #### FarmAnimals
 
