@@ -31,8 +31,6 @@ namespace BetterFarmAnimalVariety
         /// <param name="helper">Provides simplified APIs for writing mods.</param>
         public override void Entry(IModHelper helper)
         {
-            System.Diagnostics.Trace.WriteLine("Hello world");
-
             // Config
             this.Config = this.LoadConfig();
 

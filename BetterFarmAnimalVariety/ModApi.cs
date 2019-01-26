@@ -1,8 +1,11 @@
-﻿using Paritee.StardewValleyAPI.Buidlings.AnimalShop;
+﻿using BetterFarmAnimalVariety.Models;
+using Paritee.StardewValleyAPI.Buidlings.AnimalShop;
 using Paritee.StardewValleyAPI.Buidlings.AnimalShop.FarmAnimals;
 using Paritee.StardewValleyAPI.FarmAnimals.Variations;
 using Paritee.StardewValleyAPI.Players;
+using Paritee.StardewValleyAPI.Utilities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BetterFarmAnimalVariety
 {
@@ -13,6 +16,12 @@ namespace BetterFarmAnimalVariety
         public ModApi(ModConfig config)
         {
             this.Config = config;
+        }
+
+        /// <returns>Returns Dictionary<string, string[]></returns>
+        public Dictionary<string, string[]> GetGroupedFarmAnimals()
+        {
+            return this.Config.FarmAnimals.ToDictionary(entry => Enums.GetValue(entry.Key), entry => entry.Value.Types);
         }
 
         /// <param name="player">Paritee.StardewValleyAPI.Players</param>
