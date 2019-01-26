@@ -6,7 +6,7 @@ Customize the types and species of farm animals you can raise without needing to
 
 - [Get Started](#get-started)
 - [Configure](#configure)
-- [Extend](#extend)
+- [For Modders](#for-modders)
 
 ## Get Started
 
@@ -53,9 +53,9 @@ You can configure your mod at `Stardew Valley/Mods/Paritee's Better Farm Animal 
 
 | Value  | Description |
 | ------------- | ------------- |
-| `0` | Void farm animals will never be available in [Marnie's animal shop](https://stardewvalleywiki.com/Marnie%27s_Ranch#Livestock) (default) |
-| `1` | Void farm animals will only be available in [Marnie's animal shop](https://stardewvalleywiki.com/Marnie%27s_Ranch#Livestock) if the player has completed the [Goblin Problem](https://stardewvalleywiki.com/Quests#Goblin_Problem) quest |
-| `2` | Void farm animals are always availabe in [Marnie's animal shop](https://stardewvalleywiki.com/Marnie%27s_Ranch#Livestock) |
+| `Never` | Void farm animals will never be available in [Marnie's animal shop](https://stardewvalleywiki.com/Marnie%27s_Ranch#Livestock) (default) |
+| `QuestOnly` | Void farm animals will only be available in [Marnie's animal shop](https://stardewvalleywiki.com/Marnie%27s_Ranch#Livestock) if the player has completed the [Goblin Problem](https://stardewvalleywiki.com/Quests#Goblin_Problem) quest |
+| `Always` | Void farm animals are always availabe in [Marnie's animal shop](https://stardewvalleywiki.com/Marnie%27s_Ranch#Livestock) |
 
 #### FarmAnimals
 
@@ -148,7 +148,29 @@ Here is a sample of a default `config.json` file:
 }
 ```
 
-### Extend
+### For Modders
+
+#### BetterFarmAnimalVarietyAPI
+
+See [SMAPI Modder Guide](https://stardewvalleywiki.com/Modding:Modder_Guide/APIs/Integrations#Using_an_API) for usage. Requires [Paritee.StardewValleyAPI](https://github.com/paritee/Paritee.StardewValleyAPI).
+
+```c#
+
+/// <returns>Returns Dictionary<string, string[]> (ex. { "Cows", [ "White Cow", "Brown Cow" ] }</returns>
+public Dictionary<string, string[]> GetGroupedFarmAnimals();
+
+/// <param name="player">Paritee.StardewValleyAPI.Players</param>
+/// <returns>Returns Paritee.StardewValleyAPI.FarmAnimals.Variations.Blue</returns>
+public Blue GetBlueFarmAnimals(Player player);
+
+/// <param name="player">Paritee.StardewValleyAPI.Players</param>
+/// <returns>Returns Paritee.StardewValleyAPI.FarmAnimals.Variations.Void</returns>
+public Void GetVoidFarmAnimals(Player player);
+
+/// <param name="player">Paritee.StardewValleyAPI.Players</param>
+/// <returns>Returns Paritee.StardewValleyAPI.Buidlings.AnimalShop</returns>
+public AnimalShop GetAnimalShop(Player player)
+```
 
 #### Using BFAV Farm Animals with Only Content Patcher
 
