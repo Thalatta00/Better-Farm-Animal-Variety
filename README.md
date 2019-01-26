@@ -155,6 +155,10 @@ Here is a sample of a default `config.json` file:
 See [SMAPI Modder Guide](https://stardewvalleywiki.com/Modding:Modder_Guide/APIs/Integrations#Using_an_API) for usage. Requires [Paritee.StardewValleyAPI](https://github.com/paritee/Paritee.StardewValleyAPI).
 
 ```c#
+
+/// <returns>Returns Dictionary<string, string[]> (ex. { "Cows", [ "White Cow", "Brown Cow" ] }</returns>
+public Dictionary<string, string[]> GetGroupedFarmAnimals();
+
 /// <param name="player">Paritee.StardewValleyAPI.Players</param>
 /// <returns>Returns Paritee.StardewValleyAPI.FarmAnimals.Variations.Blue</returns>
 public Blue GetBlueFarmAnimals(Player player);
