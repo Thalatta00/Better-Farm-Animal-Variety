@@ -1,13 +1,8 @@
-﻿using BetterFarmAnimalVariety.Models;
-using Newtonsoft.Json;
-using Paritee.StardewValleyAPI.Buidlings.AnimalShop;
+﻿using Paritee.StardewValleyAPI.Buidlings.AnimalShop;
 using Paritee.StardewValleyAPI.Buidlings.AnimalShop.FarmAnimals;
 using Paritee.StardewValleyAPI.FarmAnimals.Variations;
 using Paritee.StardewValleyAPI.Players;
-using StardewModdingAPI;
-using StardewValley;
 using System.Collections.Generic;
-using System.IO;
 
 namespace BetterFarmAnimalVariety
 {
@@ -20,18 +15,24 @@ namespace BetterFarmAnimalVariety
             this.Config = config;
         }
 
+        /// <param name="player">Paritee.StardewValleyAPI.Players</param>
+        /// <returns>Returns Paritee.StardewValleyAPI.FarmAnimals.Variations.Blue</returns>
         public Blue GetBlueFarmAnimals(Player player)
         {
             BlueConfig blueConfig = new BlueConfig(player.HasSeenEvent(Blue.EVENT_ID));
             return new Blue(blueConfig);
         }
 
+        /// <param name="player">Paritee.StardewValleyAPI.Players</param>
+        /// <returns>Returns Paritee.StardewValleyAPI.FarmAnimals.Variations.Void</returns>
         public Void GetVoidFarmAnimals(Player player)
         {
             VoidConfig voidConfig = new VoidConfig(this.Config.VoidFarmAnimalsInShop, player.HasCompletedQuest(Void.QUEST_ID));
             return new Void(voidConfig);
         }
 
+        /// <param name="player">Paritee.StardewValleyAPI.Players</param>
+        /// <returns>Returns Paritee.StardewValleyAPI.Buidlings.AnimalShop</returns>
         public AnimalShop GetAnimalShop(Player player)
         {
             Dictionary<Stock.Name, string[]> available = this.Config.MapFarmAnimalsToAvailableAnimalShopStock();
