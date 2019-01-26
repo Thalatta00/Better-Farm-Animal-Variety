@@ -5,6 +5,7 @@ using Paritee.StardewValleyAPI.FarmAnimals.Variations;
 using Paritee.StardewValleyAPI.Menus;
 using Paritee.StardewValleyAPI.Players;
 using Paritee.StardewValleyAPI.Players.Actions;
+using PariteePurchaseFarmAnimalMenu = Paritee.StardewValleyAPI.Menus.PurchaseFarmAnimalMenu;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
@@ -16,9 +17,6 @@ namespace BetterFarmAnimalVariety
     /// <summary>The mod entry point.</summary>
     public class ModEntry : Mod
     {
-        public const string BFAV_DIRECTORY = "Paritee's Better Farm Animal Variety";
-        public const string BFAV_CONFIG_FILENAME = "config.json";
-
         public ModConfig Config;
 
         public Player Player;
@@ -46,6 +44,11 @@ namespace BetterFarmAnimalVariety
             this.Helper.Events.GameLoop.SaveLoaded += this.GameLoop_SaveLoaded;
             this.Helper.Events.Display.RenderingActiveMenu += this.Display_RenderingActiveMenu;
             this.Helper.Events.Input.ButtonPressed += this.Input_ButtonPressed;
+        }
+
+        public override object GetApi()
+        {
+            return new ModApi(this.Config);
         }
 
         private ModConfig LoadConfig()
@@ -122,7 +125,7 @@ namespace BetterFarmAnimalVariety
                 return;
 
             PurchaseFarmAnimal purchaseFarmAnimal = new PurchaseFarmAnimal(this.Player, this.AnimalShop);
-            Paritee.StardewValleyAPI.Menus.PurchaseFarmAnimalMenu purchaseFarmAnimalMenu = new Paritee.StardewValleyAPI.Menus.PurchaseFarmAnimalMenu(purchaseAnimalsMenu, purchaseFarmAnimal);
+            PariteePurchaseFarmAnimalMenu purchaseFarmAnimalMenu = new PariteePurchaseFarmAnimalMenu(purchaseAnimalsMenu, purchaseFarmAnimal);
 
             purchaseFarmAnimalMenu.HandleTap(e);
         }
