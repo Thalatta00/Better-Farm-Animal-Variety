@@ -74,7 +74,7 @@ Here is a sample of a default `config.json` file:
 
 ```json
 {
-  "VoidFarmAnimalsInShop": 0,
+  "VoidFarmAnimalsInShop": "Never",
   "FarmAnimals": {
     "Chickens": {
       "Name": "default",
