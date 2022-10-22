@@ -1,6 +1,7 @@
 # Paritee's Better Farm Animal Variety
 
-Customize the types and species of farm animals you can raise without needing to replace the default farm animal types
+Customize the types and species of farm animals you can raise without needing to replace the default farm animal types.
+Thalatta's Unofficial Modifications.
 
 ## Contents
 
